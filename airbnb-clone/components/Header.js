@@ -18,7 +18,7 @@ function Header() {
           objectPosition="left"
         />
       </div>
-      <div className="flex items-center md:border-2 rounded-full py-2 shadow-sm">
+      <div className="flex items-center md:border-2 rounded-full py-2 shadow-md">
         <input
           type="text"
           placeholder="Start your search"
