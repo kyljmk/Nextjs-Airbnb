@@ -5,9 +5,9 @@ import Header from "../components/Header";
 import { format } from "date-fns";
 import InfoCard from "../components/InfoCard";
 
-function Search() {
+function Search({ searchResults }) {
   const router = useRouter();
-
+  console.log(searchResults);
   const { location, startDate, endDate, numberOfGuests } = router.query;
 
   const formattedStartDate = format(new Date(startDate), "dd MMMM yy");
@@ -34,20 +34,22 @@ function Search() {
             <p className="button">More Filers</p>
           </div>
 
-          {searchResults.map(
-            ({ title, image, location, description, star, price, total }) => (
-              <InfoCard
-                image={image}
-                title={title}
-                location={location}
-                key={image}
-                description={description}
-                star={star}
-                price={price}
-                total={total}
-              />
-            )
-          )}
+          <div>
+            {searchResults.map(
+              ({ title, img, location, description, star, price, total }) => (
+                <InfoCard
+                  image={img}
+                  title={title}
+                  location={location}
+                  key={img}
+                  description={description}
+                  star={star}
+                  price={price}
+                  total={total}
+                />
+              )
+            )}
+          </div>
         </section>
       </main>
 
@@ -58,7 +60,7 @@ function Search() {
 
 export default Search;
 
-export async function GetServerSideProps() {
+export async function getServerSideProps() {
   const searchResults = await fetch("https://www.jsonkeeper.com/b/5NPS").then(
     (res) => res.json()
   );
